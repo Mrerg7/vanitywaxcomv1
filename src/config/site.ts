@@ -1,8 +1,8 @@
 export const SITE = {
   name: 'VanityWax.com',
-  title: 'VanityWax.com • Premium Domain for Sale | Luxury Auto Detailing & Automotive Cosmetic Brand',
+  title: 'VanityWax.com • Premium Domain for Sale | Luxury Body Waxing & Hair Removal Brand',
   description:
-    'VanityWax.com — The definitive premium .com domain for the luxury auto detailing, ceramic coating, paint correction, and automotive cosmetic brand. Strategic acquisition available.',
+    'VanityWax.com — The definitive premium .com domain for the luxury body waxing, sugaring, laser hair removal, and skincare brand. Strategic acquisition available.',
   url: 'https://vanitywax.com',
   email: 'sales@desertrich.com',
   locale: 'en_US',
