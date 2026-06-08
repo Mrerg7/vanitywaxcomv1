@@ -1,0 +1,46 @@
+---
+import { cfImageUrl, CF_IMAGES } from '../config/site';
+---
+
+<section id="why" class="max-w-5xl mx-auto px-6 py-20 border-b border-white/10">
+  <div class="grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <p class="text-xs uppercase tracking-[3px] text-amber-400 font-extrabold mb-4">Why This Domain</p>
+      <h2 class="font-display text-3xl sm:text-4xl tracking-tight mb-6">
+        A name that commands premium pricing from day one
+      </h2>
+      <p class="text-zinc-400 leading-relaxed mb-6">
+        VanityWax.com is more than a domain — it's instant brand authority in the $14B+
+        auto detailing industry. In a market where trust and luxury perception drive revenue,
+        this name positions your business at the top from the very first visit.
+      </p>
+      <ul class="space-y-3 text-zinc-300">
+        <li class="flex items-start gap-x-3">
+          <i class="fa-solid fa-circle-check text-amber-400 mt-1"></i>
+          <span>Instantly communicates premium-tier auto cosmetic services</span>
+        </li>
+        <li class="flex items-start gap-x-3">
+          <i class="fa-solid fa-circle-check text-amber-400 mt-1"></i>
+          <span>Memorable, brandable, and linguistically authoritative</span>
+        </li>
+        <li class="flex items-start gap-x-3">
+          <i class="fa-solid fa-circle-check text-amber-400 mt-1"></i>
+          <span>Exact-match keyword domain for high-intent search traffic</span>
+        </li>
+      </ul>
+    </div>
+    <div class="relative">
+      <div class="rounded-3xl overflow-hidden border border-white/10">
+        <img
+          src={cfImageUrl(CF_IMAGES.heroImageId)}
+          alt="VanityWax.com — Premium Auto Detailing Domain"
+          class="w-full h-auto"
+          width="600"
+          height="400"
+          loading="lazy"
+        />
+      </div>
+      <div class="absolute -bottom-4 -right-4 w-48 h-48 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
