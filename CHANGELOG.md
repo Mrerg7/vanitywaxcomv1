@@ -28,7 +28,7 @@ Stays on **Cloudflare Workers free plan** (static assets + edge `src/worker.ts`,
 - Urgency: `viewer-count` social proof (deterministic base + session bump), "1 of 1" badge, exit-intent copy.
 - Social proof: market-proof cards + 2 testimonials (marked illustrative/on-file to stay truthful).
 - Offer form `#offer`: name/email/amount/use/message → prefilled `mailto:` (no backend = free), validation + error role=alert.
-- Exit-intent dialog: mouseleave-top + 45s + 70% scroll, once per session, Esc/backdrop close, email → first-refusal `mailto:`.
+- Exit-intent dialog: engagement-gated — pointer `mouseleave` from top only after 20s + mouse entered + body focused; scroll fallback only after 15s + ≥400px real scroll + 85% depth (nav-anchor jumps no longer trigger); time fallback 90s; once per session; Esc/backdrop close; email → first-refusal `mailto:`.
 - Copy-email button in footer.
 
 ### IV. Mobile

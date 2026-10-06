@@ -292,7 +292,9 @@ import Footer from '../components/Footer.astro';
       });
     })();
 
-    // Exit-intent dialog (mouseleave-top + 45s + 70% scroll, once per session)
+    // Exit-intent dialog — gated on engagement so it never fires on first paint
+    // Triggers: pointer leaves from top (after 20s + mouse entered), 85% scroll
+    // after real scrolling + 15s, or 90s time fallback. Once per session.
     (() => {
       const dialog = document.getElementById('exit-intent');
       if (!dialog) return;
@@ -303,15 +305,34 @@ import Footer from '../components/Footer.astro';
       } catch (e) {}
       if (shown) return;
 
+      const MIN_MS = 20000;
+      const TIME_FALLBACK_MS = 90000;
+      const SCROLL_MIN_MS = 15000;
+      const SCROLL_DEPTH = 0.85;
+      const SCROLL_MIN_PX = 400;
+
+      const startedAt = Date.now();
+      let mouseEntered = false;
+      let maxScrollDepth = 0;
+      let realScrollDistance = 0;
+      let lastScrollY = window.scrollY;
+
+      const elapsed = () => Date.now() - startedAt;
+      const scrollDepth = () => {
+        const doc = document.documentElement;
+        const max = doc.scrollHeight - window.innerHeight;
+        return max <= 0 ? 1 : (window.scrollY + window.innerHeight) / doc.scrollHeight;
+      };
+
       const show = () => {
-        if (dialog.classList.contains('hidden')) {
-          dialog.classList.remove('hidden');
-          dialog.classList.add('flex');
-          try {
-            sessionStorage.setItem(shownKey, '1');
-          } catch (e) {}
-          document.getElementById('exit-email')?.focus();
-        }
+        if (!dialog.classList.contains('hidden')) return;
+        if (elapsed() < MIN_MS) return;
+        dialog.classList.remove('hidden');
+        dialog.classList.add('flex');
+        try {
+          sessionStorage.setItem(shownKey, '1');
+        } catch (e) {}
+        document.getElementById('exit-email')?.focus();
       };
       const hide = () => {
         dialog.classList.add('hidden');
@@ -325,21 +346,38 @@ import Footer from '../components/Footer.astro';
         if (e.key === 'Escape') hide();
       });
 
-      // mouseleave near top (desktop intent)
-      document.addEventListener('mouseout', (e) => {
-        if (e.clientY <= 0 && !e.relatedTarget && !e.toElement) show();
+      // Desktop exit intent: pointer leaves the viewport from the top edge.
+      // mouseleave is far more reliable than mouseout (no child-element noise).
+      const onLeave = (e) => {
+        if (!mouseEntered) return;
+        if (elapsed() < MIN_MS) return;
+        if (document.activeElement && document.activeElement !== document.body) return;
+        const y = e.clientY ?? (e.relatedTarget ? -1 : 0);
+        if (y <= 0) show();
+      };
+      document.documentElement.addEventListener('mouseleave', onLeave);
+      document.addEventListener('mouseenter', () => {
+        mouseEntered = true;
       });
 
-      // time-based fallback
-      setTimeout(show, 45000);
-
-      // scroll-based fallback
+      // Scroll fallback: only after the visitor has actually explored the page.
       const onScroll = () => {
-        const doc = document.documentElement;
-        const scrolled = (window.scrollY + window.innerHeight) / doc.scrollHeight;
-        if (scrolled > 0.7) show();
+        const y = window.scrollY;
+        const delta = Math.abs(y - lastScrollY);
+        lastScrollY = y;
+        if (delta > 0) realScrollDistance += delta;
+
+        const depth = scrollDepth();
+        if (depth > maxScrollDepth) maxScrollDepth = depth;
+
+        if (elapsed() < SCROLL_MIN_MS) return;
+        if (realScrollDistance < SCROLL_MIN_PX) return;
+        if (depth >= SCROLL_DEPTH) show();
       };
       window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Time fallback: long enough that only a genuine visitor hits it.
+      setTimeout(show, TIME_FALLBACK_MS);
 
       document.getElementById('exit-form')?.addEventListener('submit', (e) => {
         e.preventDefault();
