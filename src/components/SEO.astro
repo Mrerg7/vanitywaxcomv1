@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  pathname: string;
+  keywords?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage,
+  pathname,
+  keywords = 'vanitywax.com for sale, buy .com domains, premium domain names, body waxing domain, Brazilian wax domain, laser hair removal domain, sugaring domain, skincare brand domain, investment domains, domain marketplace, luxury beauty domain',
+} = Astro.props;
+const normalizedPathname = pathname.endsWith('/') ? pathname : pathname + '/';
+const canonicalURL = new URL(normalizedPathname, Astro.site);
+---
+
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="googlebot" content="index, follow" />
+<meta name="author" content="VanityWax.com" />
+<meta name="geo.region" content="US-AZ" />
+<meta name="geo.placename" content="Phoenix — Arizona (Premium Domain Listing)" />
+<meta name="rating" content="general" />
+<meta name="revisit-after" content="7 days" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:site_name" content="VanityWax.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+{ogImage && <meta property="og:image:secure_url" content={ogImage} />}
+{ogImage && <meta property="og:image:width" content="1200" />}
+{ogImage && <meta property="og:image:height" content="630" />}
+{ogImage && <meta property="og:image:alt" content="VanityWax.com — Premium Domain for Luxury Body Waxing & Hair Removal" />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+<meta name="twitter:image:alt" content="VanityWax.com — Premium Domain for Luxury Body Waxing & Hair Removal" />

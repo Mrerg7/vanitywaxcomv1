@@ -1,1 +1,8 @@
-/index.html / 301
+# Canonical URL enforcement — single indexed homepage at https://vanitywax.com/
+# Note: www → apex is handled in src/worker.ts (host redirects cannot live here)
+/index.html  /  301
+/sitemap.xml  /sitemap-index.xml  301
+/search  /  301
+/vanitywaxcom.html  /  301
+/home  /  301
+/index  /  301

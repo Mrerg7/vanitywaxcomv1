@@ -1,51 +1,111 @@
 ---
-import { ACQUISITION_MAILTO } from '../config/site';
+import { OFFER_MAILTO, BUY_NOW_MAILTO, AGENT_MAILTO, ACQUISITION_MAILTO } from '../config/site';
 import { cfImageUrl, CF_IMAGES } from '../config/site';
 ---
 
-<section class="pt-20 pb-16 md:pt-24 md:pb-20 border-b border-white/10 detail-grid">
-  <div class="max-w-5xl mx-auto px-6 text-center">
-    <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-3xl bg-white/5 border border-white/10 mb-6">
-      <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-      <span class="text-xs font-medium tracking-[1.5px] text-amber-400">PREMIUM .COM DOMAIN • STRATEGIC ACQUISITION</span>
+<section class="pt-20 pb-16 md:pt-24 md:pb-20 border-b border-line detail-grid" id="top">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+    <div class="flex flex-wrap items-center justify-center gap-2 mb-6">
+      <span class="inline-flex items-center gap-x-2 px-4 py-1.5 min-h-[32px] rounded-3xl bg-elevated/60 border border-line backdrop-blur-md">
+        <span class="w-2 h-2 bg-accent rounded-full animate-pulse" aria-hidden="true"></span>
+        <span class="text-xs font-semibold tracking-[1.5px] text-accent uppercase">Premium .com Domain • Available Now</span>
+      </span>
+      <span class="inline-flex items-center px-4 py-1.5 min-h-[32px] rounded-3xl bg-accent-soft border border-accent/30 text-accent text-xs font-semibold tracking-[1.5px] uppercase">
+        1 of 1 • When it&rsquo;s gone, it&rsquo;s gone
+      </span>
     </div>
 
-    <h1 class="font-display text-[3.25rem] md:text-[4.75rem] leading-[0.95] tracking-[-0.055em] mb-4">
-      <span class="text-white">vanitywax</span><span class="wax-gradient">.com</span>
+    <h1 class="font-display text-[2.75rem] sm:text-[3.25rem] md:text-[4.75rem] leading-[0.95] tracking-[-0.055em] mb-4 break-words">
+      <span class="text-ink">vanitywax</span><span class="wax-gradient">.com</span>
     </h1>
 
-    <p class="max-w-2xl mx-auto text-2xl md:text-3xl font-medium tracking-tight text-zinc-300 mb-8">
+    <p class="max-w-2xl mx-auto text-xl sm:text-2xl md:text-3xl font-medium tracking-tight text-muted mb-4">
       The definitive .com for<br class="hidden md:block" />luxury body waxing &amp; hair removal.
     </p>
+    <p class="max-w-2xl mx-auto text-base sm:text-lg text-muted/90 mb-8">
+      Premium .com &bull; All serious offers considered &bull; Secure Escrow.com transfer
+    </p>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+    <!-- Tiered CTAs: Make Offer / Buy Now / Contact Agent -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-10 w-full sm:w-auto mx-auto" role="group" aria-label="Purchase options">
       <a
-        href={ACQUISITION_MAILTO}
-        class="group w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-9 py-4 text-lg font-semibold rounded-3xl bg-white text-zinc-950 hover:bg-zinc-100 active:scale-[0.985] transition-all shadow-xl shadow-black/20"
+        href={OFFER_MAILTO}
+        data-track="hero-make-offer"
+        class="group w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-6 sm:px-9 py-3.5 sm:py-4 min-h-[48px] text-base sm:text-lg font-semibold bg-accent text-on-dark hover:brightness-110 active:scale-[0.985] transition-all rounded-3xl shadow-xl shadow-black/15"
       >
-        <span>Acquire for $85,000</span>
-        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        <span>Make an Offer</span>
+        <svg class="w-5 h-5 group-active:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
       </a>
+
       <a
-        href="#why"
-        class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-8 py-4 text-lg font-medium rounded-3xl border border-white/20 hover:bg-white/5 transition-all"
+        href={BUY_NOW_MAILTO}
+        data-track="hero-buy-now"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 sm:px-7 py-3.5 sm:py-4 min-h-[48px] text-base font-semibold btn-primary shadow-xl"
       >
-        <span>Explore the opportunity</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        <span>Buy Now via Escrow</span>
+      </a>
+
+      <a
+        href={AGENT_MAILTO}
+        data-track="hero-contact-agent"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-x-2 px-6 sm:px-7 py-3.5 sm:py-4 min-h-[48px] text-base font-medium btn-secondary"
+      >
+        <span>Contact Agent</span>
       </a>
     </div>
 
-    <div class="flex items-center justify-center gap-x-8 text-sm text-zinc-500">
-      <div class="flex items-center gap-x-2">
-        <i class="fa-solid fa-check text-amber-400"></i>
-        <span>Instant brand recognition</span>
-      </div>
-      <div class="flex items-center gap-x-2">
-        <i class="fa-solid fa-check text-amber-400"></i>
-        <span>Premium-tier ready</span>
-      </div>
-      <div class="flex items-center gap-x-2">
-        <i class="fa-solid fa-check text-amber-400"></i>
-        <span>Professional .com equity</span>
+    <!-- Trust strip + social proof -->
+    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-muted">
+      <span class="inline-flex items-center gap-x-2">
+        <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <span>Escrow.com &amp; Dan.com supported</span>
+      </span>
+      <span class="inline-flex items-center gap-x-2">
+        <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Response within 24 hours</span>
+      </span>
+      <span class="inline-flex items-center gap-x-2" aria-live="polite">
+        <span class="w-2 h-2 bg-accent rounded-full animate-pulse" aria-hidden="true"></span>
+        <span id="viewer-count">Serious inquiries from salons &amp; beauty brands this month</span>
+      </span>
+    </div>
+
+    <!-- Domain visualization mockup -->
+    <div class="mt-10 max-w-2xl mx-auto" aria-hidden="true">
+      <div class="rounded-3xl border border-line bg-elevated/70 backdrop-blur-md p-4 sm:p-5 text-left shadow-2xl shadow-black/20">
+        <div class="flex items-center gap-x-2 mb-3">
+          <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+          <span class="w-3 h-3 rounded-full bg-amber-400/80"></span>
+          <span class="w-3 h-3 rounded-full bg-emerald-400/80"></span>
+          <span class="ml-2 text-xs font-mono text-muted bg-surface/60 rounded-lg px-3 py-1">vanitywax.com</span>
+        </div>
+        <div class="flex items-center gap-x-4">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 flex items-center justify-center shrink-0">
+            <span class="text-zinc-950 font-black text-2xl tracking-tighter">VW</span>
+          </div>
+          <div class="min-w-0">
+            <div class="text-xl sm:text-2xl font-display font-semibold tracking-tight truncate">VanityWax.com</div>
+            <div class="text-sm text-muted truncate">Luxury Body Waxing &bull; Brazilian &bull; Laser &bull; Sugaring &bull; Skin Care</div>
+          </div>
+        </div>
+        <img
+          src={cfImageUrl(CF_IMAGES.heroImageId)}
+          alt=""
+          width="600"
+          height="200"
+          loading="lazy"
+          decoding="async"
+          class="mt-4 w-full h-32 sm:h-40 object-cover rounded-2xl"
+        />
       </div>
     </div>
   </div>

@@ -1,12 +1,15 @@
 ---
 import '../styles/global.css';
-import { SITE, OG_IMAGE, ACQUISITION_MAILTO } from '../config/site';
+import SEO from '../components/SEO.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { SITE, OG_IMAGE, ACQUISITION_MAILTO, OFFER_MAILTO, BUY_NOW_MAILTO, AGENT_MAILTO } from '../config/site';
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   noindex?: boolean;
+  pathname?: string;
 }
 
 const {
@@ -14,10 +17,35 @@ const {
   description = SITE.description,
   ogImage = OG_IMAGE,
   noindex = false,
+  pathname = '/',
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, SITE.url);
+const canonicalURL = new URL(pathname, SITE.url);
 const publishedDate = '2026-06-08';
+const modifiedDate = '2026-10-06';
+
+const faqs = [
+  {
+    q: 'How does the domain transfer process work?',
+    a: 'The transfer is handled through a secure escrow service (Escrow.com, Dan.com, or similar). Funds are held in escrow until the domain is successfully transferred to your registrar account. The entire process typically takes 3–10 business days.',
+  },
+  {
+    q: 'Is the price negotiable?',
+    a: 'Serious offers are always considered. The listed price reflects the domain\'s strategic value in a growing market. Contact us with your proposal for a confidential discussion.',
+  },
+  {
+    q: 'Can I use VanityWax.com for any type of beauty business?',
+    a: 'Absolutely. VanityWax.com is versatile enough for waxing salons, sugaring studios, laser hair removal clinics, skincare product brands, e-commerce stores, or any premium hair removal and esthetics venture. The brand works across all segments of the beauty industry.',
+  },
+  {
+    q: 'What makes this domain valuable?',
+    a: '"Vanity wax" combines two powerful concepts — beauty and self-care ("vanity") and hair removal ("wax"). It\'s an exact-match .com that instantly conveys premium body waxing and hair removal services. In an industry where trust and professionalism are everything, the right domain name is a competitive moat.',
+  },
+  {
+    q: 'Can I buy now instead of making an offer?',
+    a: 'Yes. Choose Buy Now via Escrow to start a secure transaction immediately, Make an Offer to propose your terms, or Contact Agent with questions. All three options take under a minute.',
+  },
+];
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -25,21 +53,55 @@ const structuredData = {
     {
       '@type': 'WebSite',
       '@id': `${SITE.url}/#website`,
-      url: SITE.url,
+      url: `${SITE.url}/`,
       name: SITE.name,
       description,
       inLanguage: 'en-US',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${SITE.url}/?s={search_term_string}`,
+        },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${SITE.url}/#organization`,
+      name: SITE.name,
+      url: `${SITE.url}/`,
+      logo: `${SITE.url}/favicon.svg`,
+      email: SITE.email,
+      description: 'Premium domain listing for VanityWax.com — luxury body waxing and hair removal brand domain.',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Phoenix',
+        addressRegion: 'AZ',
+        addressCountry: 'US',
+      },
     },
     {
       '@type': 'WebPage',
       '@id': `${SITE.url}/#webpage`,
-      url: SITE.url,
+      url: `${SITE.url}/`,
       name: title,
       description,
       isPartOf: { '@id': `${SITE.url}/#website` },
       datePublished: publishedDate,
-      dateModified: publishedDate,
+      dateModified: modifiedDate,
       inLanguage: 'en-US',
+      breadcrumb: { '@id': `${SITE.url}/#breadcrumb` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${SITE.url}/#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'VanityWax.com', item: `${SITE.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Why This Domain', item: `${SITE.url}/#why` },
+        { '@type': 'ListItem', position: 3, name: 'How to Acquire', item: `${SITE.url}/#acquire` },
+        { '@type': 'ListItem', position: 4, name: 'Make an Offer', item: `${SITE.url}/#offer` },
+      ],
     },
     {
       '@type': 'Product',
@@ -47,7 +109,7 @@ const structuredData = {
       name: 'VanityWax.com Premium Domain Name',
       description:
         'The definitive premium .com domain for luxury body waxing, sugaring, laser hair removal, and skincare brands. Available for acquisition.',
-      url: SITE.url,
+      url: `${SITE.url}/`,
       image: OG_IMAGE,
       category: 'Premium Domain Name',
       brand: {
@@ -56,15 +118,19 @@ const structuredData = {
       },
       offers: {
         '@type': 'Offer',
-        url: ACQUISITION_MAILTO,
-        price: '85000',
-        priceCurrency: 'USD',
+        url: `${SITE.url}/#offer`,
         availability: 'https://schema.org/InStock',
-        seller: {
-          '@type': 'Organization',
-          name: SITE.name,
-          email: SITE.email,
+        price: SITE.price,
+        priceCurrency: 'USD',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          minPrice: SITE.price,
+          maxPrice: '99999',
+          priceCurrency: 'USD',
         },
+        businessFunction: 'https://purl.org/goodrelations/v1#Sell',
+        seller: { '@id': `${SITE.url}/#organization` },
+        description: 'Serious offers considered. Secure transfer via Escrow.com, Dan.com, or equivalent.',
         shippingDetails: {
           '@type': 'OfferShippingDetails',
           shippingRate: {
@@ -82,8 +148,8 @@ const structuredData = {
             },
             transitTime: {
               '@type': 'QuantitativeValue',
-              minValue: 0,
-              maxValue: 0,
+              minValue: 1,
+              maxValue: 3,
               unitCode: 'DAY',
             },
           },
@@ -92,43 +158,19 @@ const structuredData = {
             addressCountry: 'US',
           },
         },
-        hasMerchantReturnPolicy: {
-          '@type': 'MerchantReturnPolicy',
-          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-          returnMethod: 'https://schema.org/ReturnByMail',
-          returnFees: 'https://schema.org/FreeReturn',
-          applicableCountry: 'US',
-          merchantReturnDays: 0,
-        },
-      },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5',
-        bestRating: '5',
-        ratingCount: '1',
-      },
-      review: {
-        '@type': 'Review',
-        author: {
-          '@type': 'Organization',
-          name: SITE.name,
-        },
-        reviewBody:
-          'The definitive .com domain for the luxury hair removal and body waxing industry — unmatched brand authority for a premium waxing salon or skincare venture.',
       },
     },
     {
-      '@type': 'Organization',
-      '@id': `${SITE.url}/#organization`,
-      name: SITE.name,
-      url: SITE.url,
-      email: SITE.email,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Phoenix',
-        addressRegion: 'AZ',
-        addressCountry: 'US',
-      },
+      '@type': 'FAQPage',
+      '@id': `${SITE.url}/#faq`,
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.a,
+        },
+      })),
     },
   ],
 };
@@ -138,37 +180,49 @@ const structuredData = {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+    <meta name="format-detection" content="telephone=no" />
 
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <SEO title={title} description={description} ogImage={ogImage} pathname={pathname} keywords={SITE.keywords} />
     <meta name="robots" content={noindex ? 'noindex' : 'index, follow, max-image-preview:large'} />
     <link rel="canonical" href={canonicalURL} />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:secure_url" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="VanityWax.com — Premium Domain for Luxury Body Waxing & Hair Removal" />
-    <meta property="og:locale" content={SITE.locale} />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:image:alt" content="VanityWax.com — Premium Domain for Luxury Body Waxing & Hair Removal" />
+    <link rel="sitemap" href="/sitemap-index.xml" type="application/xml" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <meta name="google-site-verification" content={SITE.googleSiteVerification} />
+
+    <!-- Performance: early connections only (no render-blocking third-party CSS) -->
+    <link rel="preconnect" href="https://imagedelivery.net" crossorigin />
+    <link rel="dns-prefetch" href="https://imagedelivery.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Avoid dark-mode flash: runs before paint, <1KB -->
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('vanitywax-theme');
+        if (t === 'dark' || (!t && !matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    </script>
+
+    <StructuredData schema={structuredData} />
   </head>
-  <body>
+  <body class="bg-surface text-ink antialiased overflow-x-hidden">
+    <a href="#main" class="skip-link">Skip to main content</a>
     <slot />
   </body>
 </html>

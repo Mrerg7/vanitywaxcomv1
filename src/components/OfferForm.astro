@@ -1,0 +1,77 @@
+---
+import { SITE, BUY_NOW_MAILTO, AGENT_MAILTO } from '../config/site';
+---
+
+<section id="offer" class="max-w-3xl mx-auto px-4 sm:px-6 pb-20 scroll-mt-24">
+  <div class="bg-elevated border border-line rounded-3xl p-6 sm:p-10 reveal shadow-sm">
+    <div class="text-center mb-8">
+      <div class="modern-pill mb-4">ONE-OF-ONE ASSET</div>
+      <h2 class="font-display text-3xl sm:text-4xl tracking-tight">Make your move on VanityWax.com</h2>
+      <p class="mt-3 text-muted text-base sm:text-lg">
+        No account, no fees, no obligation. Your details open a pre-filled secure email — nothing is stored on a server.
+      </p>
+    </div>
+
+    <form id="offer-form" class="space-y-4" novalidate>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label for="f-name" class="block text-sm font-semibold mb-1.5">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name" class="field" />
+        </div>
+        <div>
+          <label for="f-email" class="block text-sm font-semibold mb-1.5">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" class="field" />
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label for="f-amount" class="block text-sm font-semibold mb-1.5">Offer amount (USD)</label>
+          <input id="f-amount" name="amount" type="text" inputmode="numeric" placeholder={`e.g. ${SITE.priceLabel.replace('$', '')}`} class="field" />
+        </div>
+        <div>
+          <label for="f-use" class="block text-sm font-semibold mb-1.5">Intended use</label>
+          <select id="f-use" name="use" class="field">
+            <option>Waxing salon / studio</option>
+            <option>Sugaring studio</option>
+            <option>Laser hair removal clinic</option>
+            <option>Skincare / waxing product brand</option>
+            <option>E-commerce / retail</option>
+            <option>Investment / portfolio</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label for="f-msg" class="block text-sm font-semibold mb-1.5">Message <span class="font-normal text-muted">(optional)</span></label>
+        <textarea id="f-msg" name="message" rows="3" placeholder="Timeline, questions, or terms…" class="field"></textarea>
+      </div>
+      <p id="form-error" class="hidden text-sm text-red-600 font-medium" role="alert">Please add your name and a valid email so we can reply within 24 hours.</p>
+      <div class="flex flex-col sm:flex-row gap-3 pt-2">
+        <button
+          type="submit"
+          data-track="offer-submit"
+          class="flex-1 inline-flex items-center justify-center gap-x-2 px-6 py-4 min-h-[48px] bg-accent text-on-dark font-semibold rounded-2xl transition-all active:scale-[0.985] text-base hover:brightness-110"
+        >
+          Make an Offer
+        </button>
+        <a
+          href={BUY_NOW_MAILTO}
+          data-track="offer-buy-now"
+          class="flex-1 inline-flex items-center justify-center px-6 py-4 min-h-[48px] btn-primary text-base text-center"
+        >
+          Buy Now via Escrow
+        </a>
+        <a
+          href={AGENT_MAILTO}
+          data-track="offer-contact"
+          class="flex-1 inline-flex items-center justify-center px-6 py-4 min-h-[48px] btn-secondary font-semibold text-base text-center"
+        >
+          Contact Agent
+        </a>
+      </div>
+      <p class="text-xs text-muted text-center pt-1">
+        Confidential &bull; No obligation &bull; Escrow.com recommended &bull; Response within 24 hours
+      </p>
+    </form>
+  </div>
+</section>

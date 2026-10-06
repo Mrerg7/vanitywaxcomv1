@@ -2,35 +2,41 @@
 import { cfImageUrl, CF_IMAGES } from '../config/site';
 ---
 
-<section id="why" class="max-w-5xl mx-auto px-6 py-20 border-b border-white/10">
+<section id="why" class="max-w-5xl mx-auto px-4 sm:px-6 py-20 border-b border-line">
   <div class="grid lg:grid-cols-2 gap-12 items-center">
-    <div>
-      <p class="text-xs uppercase tracking-[3px] text-amber-400 font-extrabold mb-4">Why This Domain</p>
+    <div class="reveal">
+      <p class="modern-pill mb-4">WHY THIS DOMAIN</p>
       <h2 class="font-display text-3xl sm:text-4xl tracking-tight mb-6">
         A name that commands premium pricing from day one
       </h2>
-      <p class="text-zinc-400 leading-relaxed mb-6">
+      <p class="text-muted leading-relaxed mb-6">
         VanityWax.com is more than a domain — it's instant brand authority in the $12B+
         hair removal and body waxing industry. In a market where trust and luxury perception drive revenue,
         this name positions your business at the top from the very first visit.
       </p>
-      <ul class="space-y-3 text-zinc-300">
+      <ul class="space-y-3 text-ink">
         <li class="flex items-start gap-x-3">
-          <i class="fa-solid fa-circle-check text-amber-400 mt-1"></i>
+          <svg class="w-5 h-5 text-accent mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
           <span>Instantly communicates premium-tier hair removal and waxing services</span>
         </li>
         <li class="flex items-start gap-x-3">
-          <i class="fa-solid fa-circle-check text-amber-400 mt-1"></i>
+          <svg class="w-5 h-5 text-accent mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
           <span>Memorable, brandable, and linguistically authoritative</span>
         </li>
         <li class="flex items-start gap-x-3">
-          <i class="fa-solid fa-circle-check text-amber-400 mt-1"></i>
+          <svg class="w-5 h-5 text-accent mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
           <span>Exact-match keyword domain for high-intent beauty search traffic</span>
         </li>
       </ul>
     </div>
-    <div class="relative">
-      <div class="rounded-3xl overflow-hidden border border-white/10">
+    <div class="relative reveal" style="--reveal-delay: 120ms">
+      <div class="rounded-3xl overflow-hidden border border-line">
         <img
           src={cfImageUrl(CF_IMAGES.heroImageId)}
           alt="VanityWax.com — Premium Body Waxing Domain"
@@ -38,9 +44,10 @@ import { cfImageUrl, CF_IMAGES } from '../config/site';
           width="600"
           height="400"
           loading="lazy"
+          decoding="async"
         />
       </div>
-      <div class="absolute -bottom-4 -right-4 w-48 h-48 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -bottom-4 -right-4 w-48 h-48 rounded-full bg-accent/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
     </div>
   </div>
 </section>

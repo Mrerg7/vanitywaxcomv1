@@ -1,42 +1,74 @@
 ---
-import { ACQUISITION_MAILTO } from '../config/site';
+import { ACQUISITION_MAILTO, OFFER_MAILTO } from '../config/site';
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-zinc-950/80 backdrop-blur-lg" id="nav">
-  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-line bg-surface/90 backdrop-blur-lg" id="nav" aria-label="Primary">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
     <div class="flex items-center gap-x-3">
-      <a href="/" class="flex items-center gap-x-2">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 flex items-center justify-center">
+      <a href="/" class="flex items-center gap-x-2 rounded-xl" aria-label="VanityWax.com — back to top">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 flex items-center justify-center shrink-0">
           <span class="text-zinc-950 font-black text-xl tracking-tighter">VW</span>
         </div>
-        <div>
-          <span class="font-display text-2xl font-semibold tracking-tighter">vanitywax</span>
-          <span class="text-xs text-zinc-500 font-mono tracking-[3px] ml-0.5">.COM</span>
+        <div class="min-w-0">
+          <span class="font-display text-xl sm:text-2xl font-semibold tracking-tighter">vanitywax</span>
+          <span class="text-xs text-muted font-mono tracking-[3px] ml-0.5">.COM</span>
         </div>
       </a>
     </div>
 
+    <!-- Desktop Nav -->
     <div class="hidden md:flex items-center gap-x-8 text-sm">
-      <a href="#why" class="hover:text-white transition-colors text-zinc-400">Why This Domain</a>
-      <a href="#detail" class="hover:text-white transition-colors text-zinc-400">The Industry</a>
-      <a href="#for" class="hover:text-white transition-colors text-zinc-400">Perfect For</a>
-      <a href="#acquire" class="hover:text-white transition-colors text-zinc-400">Acquire</a>
+      <a href="#why" class="hover:text-accent transition-colors text-muted py-3">Why This Domain</a>
+      <a href="#detail" class="hover:text-accent transition-colors text-muted py-3">The Industry</a>
+      <a href="#for" class="hover:text-accent transition-colors text-muted py-3">Perfect For</a>
+      <a href="#faq" class="hover:text-accent transition-colors text-muted py-3">FAQ</a>
+      <a href="#acquire" class="hover:text-accent transition-colors text-muted py-3">Acquire</a>
     </div>
 
-    <div class="flex items-center gap-x-4">
+    <div class="flex items-center gap-x-2 sm:gap-x-3">
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle dark mode"
+        class="w-12 h-12 inline-flex items-center justify-center rounded-2xl border border-line hover:bg-elevated transition-all shrink-0"
+      >
+        <svg id="theme-icon-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg id="theme-icon-moon" class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+
+      <a
+        href={OFFER_MAILTO}
+        data-track="nav-make-offer"
+        class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 min-h-[48px] text-sm font-semibold rounded-2xl border border-line hover:bg-elevated transition-all active:scale-[0.985]"
+      >
+        Make Offer
+      </a>
       <a
         href="#acquire"
-        class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-2xl bg-white text-zinc-950 hover:bg-zinc-100 transition-all active:scale-[0.985]"
+        data-track="nav-acquire"
+        class="inline-flex items-center justify-center px-4 sm:px-5 py-2.5 min-h-[48px] text-sm font-semibold rounded-2xl btn-primary !px-5"
       >
-        Acquire Now
+        <span class="hidden sm:inline">Acquire Now</span>
+        <span class="sm:hidden">Acquire</span>
       </a>
-      <a
-        href={ACQUISITION_MAILTO}
-        class="inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-2xl border border-white/20 hover:bg-white/5 transition-all"
+
+      <!-- Mobile Menu Button (48px target) -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="md:hidden w-12 h-12 inline-flex items-center justify-center text-muted hover:text-ink rounded-2xl shrink-0"
       >
-        <i class="fa-solid fa-envelope mr-2"></i>
-        <span class="hidden sm:inline">Inquire</span>
-      </a>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
   </div>
 </nav>

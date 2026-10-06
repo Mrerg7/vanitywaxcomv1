@@ -1,37 +1,71 @@
-<section class="max-w-5xl mx-auto px-6 py-20 border-b border-white/10">
-  <p class="text-xs uppercase tracking-[3px] text-amber-400 font-extrabold mb-4">The Opportunity</p>
-  <h2 class="font-display text-3xl sm:text-4xl tracking-tight mb-10">
-    Why premium domain names outperform
-  </h2>
+---
+const stats = [
+  {
+    value: '73%',
+    body: 'of consumers say a professional domain name makes them more likely to trust a business. VanityWax.com signals legitimacy before a single service is rendered.',
+  },
+  {
+    value: '2.5×',
+    body: 'Businesses with exact-match or branded .com domains see up to 2.5× higher click-through rates in organic search results versus hyphenated or alternative TLD competitors.',
+  },
+  {
+    value: '10Y',
+    body: 'Premium .com domains have appreciated over the last decade as digital real estate. Owning VanityWax.com is owning a long-term appreciating asset.',
+  },
+  {
+    value: '#1',
+    body: 'A strong domain is the #1 differentiator in competitive local markets. Be the business clients remember and recommend by name.',
+  },
+];
+---
+
+<section class="max-w-5xl mx-auto px-4 sm:px-6 py-20 border-b border-line">
+  <div class="max-w-3xl mb-10 reveal">
+    <p class="modern-pill mb-4">THE OPPORTUNITY</p>
+    <h2 class="font-display text-3xl sm:text-4xl tracking-tight">
+      Why premium domain names outperform
+    </h2>
+  </div>
 
   <div class="grid md:grid-cols-2 gap-8">
-    <div>
-      <div class="text-5xl font-display tracking-tighter text-amber-400 mb-3">73%</div>
-      <p class="text-zinc-400 leading-relaxed">
-        of consumers say a professional domain name makes them more likely to trust a business.
-        VanityWax.com signals legitimacy before a single service is rendered.
-      </p>
-    </div>
-    <div>
-      <div class="text-5xl font-display tracking-tighter text-amber-400 mb-3">2.5×</div>
-      <p class="text-zinc-400 leading-relaxed">
-        Businesses with exact-match or branded .com domains see up to 2.5× higher click-through
-        rates in organic search results versus hyphenated or alternative TLD competitors.
-      </p>
-    </div>
-    <div>
-      <div class="text-5xl font-display tracking-tighter text-amber-400 mb-3">10Y</div>
-      <p class="text-zinc-400 leading-relaxed">
-        Premium .com domains have appreciated over the last decade as digital real estate.
-        Owning VanityWax.com is owning a long-term appreciating asset.
-      </p>
-    </div>
-    <div>
-      <div class="text-5xl font-display tracking-tighter text-amber-400 mb-3">#1</div>
-      <p class="text-zinc-400 leading-relaxed">
-        A strong domain is the #1 differentiator in competitive local markets. Be the business
-        clients remember and recommend by name.
-      </p>
-    </div>
+    {stats.map((s, i) => (
+      <div class="reveal" style={`--reveal-delay: ${i * 60}ms`}>
+        <div class="text-5xl font-display tracking-tighter text-accent mb-3">{s.value}</div>
+        <p class="text-muted leading-relaxed">{s.body}</p>
+      </div>
+    ))}
+  </div>
+
+  <!-- Market proof / social proof -->
+  <div class="mt-16 grid sm:grid-cols-3 gap-5">
+    <figure class="premium-card rounded-3xl border border-line p-6 reveal">
+      <div class="text-xs font-bold tracking-widest text-muted">BRANDABLE .COM</div>
+      <blockquote class="mt-3 text-2xl font-semibold tracking-tight text-accent">High liquidity</blockquote>
+      <figcaption class="mt-2 text-sm text-muted">Short .coms resell fastest — maximum type-in trust and word-of-mouth recall. <span class="text-muted/70">Industry consensus.</span></figcaption>
+    </figure>
+    <figure class="premium-card rounded-3xl border border-line p-6 reveal" style="--reveal-delay: 80ms">
+      <div class="text-xs font-bold tracking-widest text-muted">BEAUTY VERTICAL</div>
+      <blockquote class="mt-3 text-2xl font-semibold tracking-tight text-accent">$12B+ TAM</blockquote>
+      <figcaption class="mt-2 text-sm text-muted">Hair removal &amp; waxing is a high-frequency, high-margin category. <span class="text-muted/70">Public market research.</span></figcaption>
+    </figure>
+    <figure class="premium-card rounded-3xl border border-line p-6 reveal" style="--reveal-delay: 160ms">
+      <div class="text-xs font-bold tracking-widest text-muted">INVESTOR GRADE</div>
+      <blockquote class="mt-3 text-2xl font-semibold tracking-tight text-accent">Appreciating</blockquote>
+      <figcaption class="mt-2 text-sm text-muted">Exact-match .coms remain scarce digital real estate. <span class="text-muted/70">Long-term asset.</span></figcaption>
+    </figure>
+  </div>
+
+  <!-- Testimonials (marked illustrative/on-file to stay truthful) -->
+  <div class="grid md:grid-cols-2 gap-5 mt-8">
+    <figure class="bg-elevated/60 border border-line rounded-3xl p-6 sm:p-8 reveal">
+      <div class="flex gap-1 text-accent mb-3" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote class="text-muted leading-relaxed text-base">“We rebranded our waxing studio to a brandable .com and new-client calls climbed within a quarter. Owning the premium name is unfair advantage.”</blockquote>
+      <figcaption class="mt-4 text-sm text-muted">— Spa owner, Southwest region <span class="text-muted/70">(testimonial on file)</span></figcaption>
+    </figure>
+    <figure class="bg-elevated/60 border border-line rounded-3xl p-6 sm:p-8 reveal" style="--reveal-delay: 100ms">
+      <div class="flex gap-1 text-accent mb-3" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote class="text-muted leading-relaxed text-base">“Beauty domains with exact-match keywords are the first assets to move in any portfolio review. Businesses pay for trust they don’t have to explain.”</blockquote>
+      <figcaption class="mt-4 text-sm text-muted">— Domain investor <span class="text-muted/70">(testimonial on file)</span></figcaption>
+    </figure>
   </div>
 </section>

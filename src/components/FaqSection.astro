@@ -1,44 +1,49 @@
-<section id="faq" class="max-w-3xl mx-auto px-6 py-20 border-b border-white/10">
-  <p class="text-xs uppercase tracking-[3px] text-amber-400 font-extrabold mb-4">FAQ</p>
-  <h2 class="font-display text-3xl sm:text-4xl tracking-tight mb-10">
-    Domain acquisition questions
-  </h2>
+---
+import { OFFER_MAILTO } from '../config/site';
 
-  <div class="space-y-6">
-    <div class="border border-white/10 rounded-2xl p-6">
-      <h3 class="font-semibold text-lg mb-2">How does the domain transfer process work?</h3>
-      <p class="text-zinc-400 text-sm leading-relaxed">
-        The transfer is handled through a secure escrow service (Escrow.com, Dan.com, or similar).
-        Funds are held in escrow until the domain is successfully transferred to your registrar account.
-        The entire process typically takes 3–10 business days.
-      </p>
-    </div>
+const faqs = [
+  {
+    q: 'How does the domain transfer process work?',
+    a: 'The transfer is handled through a secure escrow service (Escrow.com, Dan.com, or similar). Funds are held in escrow until the domain is successfully transferred to your registrar account. The entire process typically takes 3–10 business days.',
+  },
+  {
+    q: 'Is the price negotiable?',
+    a: 'Serious offers are always considered. The listed price reflects the domain\'s strategic value in a growing market. Contact us with your proposal for a confidential discussion.',
+  },
+  {
+    q: 'Can I use VanityWax.com for any type of beauty business?',
+    a: 'Absolutely. VanityWax.com is versatile enough for waxing salons, sugaring studios, laser hair removal clinics, skincare product brands, e-commerce stores, or any premium hair removal and esthetics venture. The brand works across all segments of the beauty industry.',
+  },
+  {
+    q: 'What makes this domain valuable?',
+    a: '"Vanity wax" combines two powerful concepts — beauty and self-care ("vanity") and hair removal ("wax"). It\'s an exact-match .com that instantly conveys premium body waxing and hair removal services. In an industry where trust and professionalism are everything, the right domain name is a competitive moat.',
+  },
+  {
+    q: 'Can I buy now instead of making an offer?',
+    a: 'Yes. Choose Buy Now via Escrow to start a secure transaction immediately, Make an Offer to propose your terms, or Contact Agent with questions. All three options take under a minute.',
+  },
+];
+---
 
-    <div class="border border-white/10 rounded-2xl p-6">
-      <h3 class="font-semibold text-lg mb-2">Is the price negotiable?</h3>
-      <p class="text-zinc-400 text-sm leading-relaxed">
-        Serious offers are always considered. The listed price reflects the domain's strategic
-        value in a growing market. Contact us with your proposal for a confidential discussion.
-      </p>
-    </div>
-
-    <div class="border border-white/10 rounded-2xl p-6">
-      <h3 class="font-semibold text-lg mb-2">Can I use VanityWax.com for any type of beauty business?</h3>
-      <p class="text-zinc-400 text-sm leading-relaxed">
-        Absolutely. VanityWax.com is versatile enough for waxing salons, sugaring studios,
-        laser hair removal clinics, skincare product brands, e-commerce stores, or any premium
-        hair removal and esthetics venture. The brand works across all segments of the beauty industry.
-      </p>
-    </div>
-
-    <div class="border border-white/10 rounded-2xl p-6">
-      <h3 class="font-semibold text-lg mb-2">What makes this domain valuable?</h3>
-      <p class="text-zinc-400 text-sm leading-relaxed">
-        "Vanity wax" combines two powerful concepts — beauty and self-care ("vanity") and hair
-        removal ("wax"). It's an exact-match .com that instantly conveys premium body waxing
-        and hair removal services. In an industry where trust and professionalism are everything,
-        the right domain name is a competitive moat.
-      </p>
-    </div>
+<section id="faq" class="max-w-3xl mx-auto px-4 sm:px-6 py-20 border-b border-line scroll-mt-24">
+  <div class="text-center mb-10 reveal">
+    <p class="modern-pill mb-4">QUESTIONS, ANSWERED</p>
+    <h2 class="font-display text-3xl sm:text-4xl tracking-tight">Domain acquisition questions</h2>
   </div>
+
+  <div class="space-y-3">
+    {faqs.map((f) => (
+      <details class="group bg-elevated/60 border border-line rounded-2xl px-5 sm:px-6 open:bg-elevated open:shadow-sm transition-all reveal">
+        <summary class="py-4 min-h-[48px] flex items-center justify-between gap-4 cursor-pointer font-semibold text-base sm:text-lg list-none [&::-webkit-details-marker]:hidden">
+          <span>{f.q}</span>
+          <span class="shrink-0 w-8 h-8 inline-flex items-center justify-center rounded-full border border-line group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
+        </summary>
+        <p class="pb-5 text-muted leading-relaxed text-base">{f.a}</p>
+      </details>
+    ))}
+  </div>
+
+  <p class="mt-6 text-center text-sm text-muted reveal">
+    Still deciding? <a href={OFFER_MAILTO} data-track="faq-offer" class="font-semibold text-accent underline underline-offset-4">Get a valuation answer in 24h</a>
+  </p>
 </section>

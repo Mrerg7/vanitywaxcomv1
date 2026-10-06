@@ -1,20 +1,32 @@
 ---
-import { ACQUISITION_MAILTO } from '../config/site';
+import { OFFER_MAILTO, BUY_NOW_MAILTO } from '../config/site';
 ---
 
-<section class="border-t border-white/10 bg-zinc-900 py-16">
-  <div class="max-w-xl mx-auto px-6 text-center">
-    <h2 class="font-display text-4xl tracking-tighter mb-4">Ready to own the premium name in body waxing?</h2>
-    <p class="text-zinc-400 mb-8">This domain will not be available long. Secure the definitive .com before your competitors do.</p>
+<section class="border-t border-line bg-elevated py-16">
+  <div class="max-w-xl mx-auto px-4 sm:px-6 text-center reveal">
+    <div class="modern-pill mb-4">DON&rsquo;T MISS IT</div>
+    <h2 class="font-display text-3xl sm:text-4xl tracking-tight mb-4">Ready to own the premium name in body waxing?</h2>
+    <p class="text-muted mb-8">
+      This domain will not be available long. Secure the definitive .com before your competitors do.
+    </p>
 
-    <a
-      href={ACQUISITION_MAILTO}
-      class="inline-flex items-center justify-center gap-x-3 px-10 h-14 rounded-3xl bg-white text-zinc-950 font-semibold text-lg hover:bg-zinc-100 active:scale-[0.985] transition-all shadow-xl"
-    >
-      Start the conversation
-      <i class="fa-solid fa-arrow-right"></i>
-    </a>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a
+        href={OFFER_MAILTO}
+        data-track="final-make-offer"
+        class="inline-flex items-center justify-center gap-x-3 px-8 py-4 min-h-[48px] text-lg font-semibold bg-accent text-on-dark rounded-3xl shadow-xl hover:brightness-110 active:scale-[0.985] transition-all w-full sm:w-auto"
+      >
+        <span>Submit Your Offer Now</span>
+      </a>
+      <a
+        href={BUY_NOW_MAILTO}
+        data-track="final-buy-now"
+        class="inline-flex items-center justify-center gap-x-2 px-8 py-4 min-h-[48px] text-lg font-semibold btn-primary rounded-3xl w-full sm:w-auto"
+      >
+        <span>Buy Now</span>
+      </a>
+    </div>
 
-    <div class="mt-6 text-xs text-zinc-500">Direct from owner • Confidential inquiries welcome</div>
+    <div class="mt-6 text-xs text-muted">Confidential &bull; No obligation &bull; Response within 24 hours &bull; Secure escrow only</div>
   </div>
 </section>

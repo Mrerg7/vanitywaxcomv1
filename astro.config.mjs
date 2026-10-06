@@ -6,10 +6,28 @@ export default defineConfig({
   site: 'https://vanitywax.com',
   output: 'static',
   trailingSlash: 'always',
+  compressHTML: true,
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: 'viewport',
+  },
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  vite: {
+    build: {
+      cssMinify: true,
+      minify: true,
+    },
+  },
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
-    sitemap(),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 1.0,
+      lastmod: new Date(),
+    }),
   ],
 });

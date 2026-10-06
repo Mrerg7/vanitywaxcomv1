@@ -1,28 +1,35 @@
+# Global security + performance headers (Workers Static Assets, free plan)
 /*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://imagedelivery.net; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:
+  Cross-Origin-Opener-Policy: same-origin-when-cross-origin
+  X-Robots-Tag: index, follow, max-image-preview:large
 
+# Prevent indexing of /index.html duplicate URLs
 /index.html
   X-Robots-Tag: noindex
-
+/*/index.html
+  X-Robots-Tag: noindex
 /404.html
   X-Robots-Tag: noindex
 
-/
-  Link: <https://vanitywax.com/>; rel="canonical"
+# Immutable caching for hashed build assets (Vite / Astro output)
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML: short edge cache, always revalidate (keeps deploys instant)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
 
 /sitemap-index.xml
   Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600
 
 /favicon.svg
   Cache-Control: public, max-age=604800, immutable
-
-/*.html
-  X-Robots-Tag: index, follow
-
-/*.css
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.js
-  Cache-Control: public, max-age=31536000, immutable

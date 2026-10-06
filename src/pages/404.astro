@@ -1,22 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { OFFER_MAILTO, ACQUISITION_MAILTO } from '../config/site';
 ---
 <BaseLayout
   title="Page Not Found — VanityWax.com"
-  description="The page you're looking for doesn't exist."
+  description="The page you're looking for doesn't exist. VanityWax.com is available for acquisition."
   noindex={true}
+  pathname="/404/"
 >
-  <main id="content" class="flex min-h-dvh flex-col items-center justify-center px-6 text-center">
-    <p class="text-sm font-medium uppercase tracking-[0.25em] text-amber-400">404</p>
-    <h1 class="mt-4 text-5xl font-semibold tracking-tight text-white lg:text-7xl">Page not found</h1>
-    <p class="mt-6 max-w-md text-lg leading-8 text-slate-400">
+  <main id="main" class="flex min-h-dvh flex-col items-center justify-center px-6 text-center">
+    <p class="text-sm font-medium uppercase tracking-[0.25em] text-accent">404</p>
+    <h1 class="mt-4 text-4xl sm:text-5xl font-display tracking-tight text-ink lg:text-7xl">Page not found</h1>
+    <p class="mt-6 max-w-md text-lg leading-8 text-muted">
       The page you're looking for doesn't exist or has been moved.
     </p>
-    <a
-      href="/"
-      class="mt-10 inline-flex items-center justify-center rounded-xl bg-amber-500 px-6 py-4 text-base font-semibold text-slate-950 transition hover:bg-amber-400"
-    >
-      ← Back to home
-    </a>
+    <div class="mt-10 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+      <a href="/" class="inline-flex items-center justify-center rounded-xl bg-accent text-on-dark px-6 py-4 min-h-[48px] text-base font-semibold transition hover:brightness-110">
+        ← Back to home
+      </a>
+      <a href={OFFER_MAILTO} data-track="404-offer" class="inline-flex items-center justify-center rounded-xl btn-secondary px-6 py-4 min-h-[48px] text-base font-semibold">
+        Make an Offer
+      </a>
+    </div>
+    <p class="mt-8 text-sm text-muted">
+      Or email <a href={ACQUISITION_MAILTO} class="text-accent underline underline-offset-4">sales@desertrich.com</a> about VanityWax.com.
+    </p>
   </main>
 </BaseLayout>

@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /.well-known/
 
 Sitemap: https://vanitywax.com/sitemap-index.xml
